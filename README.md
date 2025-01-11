@@ -23,7 +23,7 @@
 - Vite
 
 ## 项目结构
-
+```
 src/
 ├── components/ # 通用组件
 │ └── WuXingDetail.vue
@@ -41,7 +41,7 @@ src/
 ├── App.vue # 根组件
 ├── main.js # 入口文件
 └── style.css # 全局样式
-
+```
 ## 主要功能模块
 
 ### 阴阳五行
