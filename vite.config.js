@@ -9,7 +9,7 @@ export default defineConfig({
     outDir: 'docs',
     rollupOptions: {
       output: {
-        // 自定义构建后的文件名
+        // 确保所有文件都在 assets 目录下
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.')
           let extType = info[info.length - 1]
@@ -23,8 +23,22 @@ export default defineConfig({
           return `assets/${extType}/[name]-[hash][extname]`
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js'
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        // 添加这个配置来处理代码分割
+        manualChunks: {
+          'vue': ['vue'],
+          'vue-router': ['vue-router'],
+          'ant-design-vue': ['ant-design-vue'],
+          'vendor': ['@ant-design/icons-vue']
+        }
       }
-    }
+    },
+    // 使用 esbuild 压缩
+    minify: 'esbuild',
+    sourcemap: false,
+    // 确保正确处理静态资源
+    assetsInlineLimit: 4096,
+    cssCodeSplit: true,
+    modulePreload: true
   }
 })
